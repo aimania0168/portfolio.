@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Master Stock Trading, Crypto & AI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #1b263b;
+      font-weight: 700;
+      background: linear-gradient(45deg, #1b263b, #0052cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    p.lead {
+      font-size: 1.125rem;
+      margin-bottom: 30px;
+      color: #555;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      margin: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(45deg, #0052cc, #667eea);
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #667eea, #0052cc);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      left: 0;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 82, 204, 0.4);
+    }
+    
+    .bonuses {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 15px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .bonuses h2 {
+      margin-top: 0;
+      font-size: 1.4rem;
+      color: #1b263b;
+      font-weight: 600;
+    }
+    
+    .bonus-item {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(0, 82, 204, 0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .bonus-item:hover {
+      background: rgba(0, 82, 204, 0.15);
+      transform: translateX(5px);
+    }
+    
+    .bonus-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 15px;
+      color: #0052cc;
+    }
+    
+    .faq {
+      margin-top: 40px;
+      text-align: left;
+    }
+    
+    .faq h2 {
+      font-size: 1.4rem;
+      color: #1b263b;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    details {
+      margin-bottom: 15px;
+      border-radius: 10px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    details:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      color: #1b263b;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    
+    /* Countdown Timer */
+    .countdown {
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 30px 0;
+      text-align: center;
+    }
+    
+    .countdown h3 {
+      margin: 0 0 15px 0;
+      font-size: 1.2rem;
+    }
+    
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .time-unit {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 60px;
+    }
+    
+    .time-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: block;
+    }
+    
+    .time-label {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+    
+    /* Social Proof */
+    .social-proof {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid rgba(40, 167, 69, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 30px 0;
+      text-align: center;
+    }
+    
+    .social-proof-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #28a745;
+      margin-bottom: 5px;
+    }
+    
+    @media (max-width: 600px) {
+      .btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .timer {
+        gap: 10px;
+      }
+      
+      .time-unit {
+        min-width: 50px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Master Stock Trading, Crypto & AI with Confidence</h1>
+    <p class="lead">Learn proven strategies to navigate financial markets and elevate your trading game.</p>
+    
+    <!-- Social Proof -->
+    <div class="social-proof">
+      <div class="social-proof-number" id="studentCount">2,847</div>
+      <p>Students already enrolled this month!</p>
+    </div>
+    
+    <!-- Countdown Timer -->
+    <div class="countdown">
+      <h3>🔥 Limited Time Offer Ends In:</h3>
+      <div class="timer">
+        <div class="time-unit">
+          <span class="time-number" id="days">03</span>
+          <span class="time-label">Days</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-number" id="hours">14</span>
+          <span class="time-label">Hours</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-number" id="minutes">27</span>
+          <span class="time-label">Minutes</span>
+        </div>
+        <div class="time-unit">
+          <span class="time-number" id="seconds">43</span>
+          <span class="time-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+    
+    <a href="https://marketrebellion.gumroad.com/l/guqly" target="_blank" class="btn" onclick="trackClick('ebook')">Get My Ebook</a>
+    <a href="https://market-rebellion.beehiiv.com/subscribe" target="_blank" class="btn" onclick="trackClick('newsletter')">Join My Newsletter</a>
+    
+    <div class="bonuses">
+      <h2>Exclusive Bonuses Included:</h2>
+      <div class="bonus-item">
+        <svg class="bonus-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div>
+          <strong>Stock Market Analysis 101</strong> (value: $300)<br>
+          <small>Master fundamental and technical analysis</small>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <svg class="bonus-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div>
+          <strong>Crypto & AI Trading Frameworks</strong> (value: $150)<br>
+          <small>Navigate emerging markets with confidence</small>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <svg class="bonus-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div>
+          <strong>Pro Entry & Exit Point Tactics</strong> (value: $400)<br>
+          <small>Perfect your timing for maximum profits</small>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <svg class="bonus-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div>
+          <strong>Mindset & Psychology Playbook</strong> (value: $275)<br>
+          <small>Develop the mental edge of successful traders</small>
+        </div>
+      </div>
+    </div>
+    
+    <div class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>Who is this for?</summary>
+        Anyone eager to turn trading into a profitable routine—regardless of experience. Whether you're a complete beginner or looking to refine your existing strategies, this course adapts to your level.
+      </details>
+      <details>
+        <summary>What will I learn?</summary>
+        You'll learn market analysis, execution strategies, risk management, and how to think like a pro trader. Plus, get insider knowledge on crypto and AI market opportunities.
+      </details>
+      <details>
+        <summary>What if I'm not satisfied?</summary>
+        If you don't see results in 6 months, you'll get a full refund—no questions asked. We're confident in the value this course provides.
+      </details>
+      <details>
+        <summary>How long do I have access?</summary>
+        You get lifetime access to all materials, plus any future updates and bonus content we add to the course.
+      </details>
+    </div>
+  </div>
+
+  <script>
+    // Countdown Timer
+    function updateCountdown() {
+      // Set end date (3 days from now for demo)
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 3);
+      endDate.setHours(23, 59, 59, 999);
+      
+      const now = new Date().getTime();
+      const timeLeft = endDate.getTime() - now;
+      
+      if (timeLeft > 0) {
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      }
+    }
+    
+    // Update countdown every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Animated student counter
+    function animateCounter() {
+      const counter = document.getElementById('studentCount');
+      const target = 2847;
+      const increment = target / 100;
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        counter.textContent = Math.floor(current).toLocaleString();
+      }, 20);
+    }
+    
+    // Start counter animation when page loads
+    window.addEventListener('load', animateCounter);
+    
+    // Click tracking (for analytics)
+    function trackClick(type) {
+      console.log(`User clicked: ${type}`);
+      // You can integrate with Google Analytics, Facebook Pixel, etc. here
+      // gtag('event', 'click', { 'event_category': 'CTA', 'event_label': type });
+    }
+    
+    // Add subtle parallax effect on scroll
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const container = document.querySelector('.container');
+      container.style.transform = `translateY(${scrolled * 0.1}px)`;
+    });
+  </script>
+</body>
+</html>
